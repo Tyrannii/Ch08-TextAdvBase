@@ -11,7 +11,7 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
+ * @author  Colten Aguilar
  * @version 2016.02.29
  */
 
@@ -132,12 +132,16 @@ private void printWelcome()
                 break;
 
             case GO:
-                goRoom(command);
-                break;
+    goRoom(command);
+    break;
 
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
+case LOOK:
+    System.out.println(currentRoom.getLongDescription());
+    break;
+
+case QUIT:
+    wantToQuit = quit(command);
+    break;
         }
         return wantToQuit;
     }
