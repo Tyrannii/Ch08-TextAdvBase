@@ -76,6 +76,7 @@ public class Game
         
         // Add items to the rooms.
 entrance.setItem(new Item("key", "An old rusty key", 1));
+entrance.setItem(new Item("flashlight", "An old flashlight", 2));
 livingRoom.setItem(new Item("candle", "A half-burned candle", 1));
 kitchen.setItem(new Item("knife", "An old kitchen knife", 2));
 diningRoom.setItem(new Item("plate", "A dusty silver plate", 2));
