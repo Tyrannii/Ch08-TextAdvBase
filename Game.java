@@ -73,6 +73,16 @@ public class Game
         attic.setExit("down", bedroom);
 
         basement.setExit("north", entrance);
+        
+        // Add items to the rooms.
+entrance.setItem(new Item("key", "An old rusty key", 1));
+livingRoom.setItem(new Item("candle", "A half-burned candle", 1));
+kitchen.setItem(new Item("knife", "An old kitchen knife", 2));
+diningRoom.setItem(new Item("plate", "A dusty silver plate", 2));
+library.setItem(new Item("book", "A mysterious ancient book", 3));
+bedroom.setItem(new Item("doll", "An old porcelain doll", 2));
+basement.setItem(new Item("lantern", "A broken lantern", 4));
+attic.setItem(new Item("chest", "A small wooden chest", 5));
 
         // Start the player in the entrance hall.
         currentRoom = entrance;
