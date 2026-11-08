@@ -98,17 +98,18 @@ public class Game
     }
 
     /**
-     * Print out the opening message for the player.
-     */
-    private void printWelcome()
-    {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println();
-        System.out.println(currentRoom.getLongDescription());
-    }
+ * Print the welcome message and starting room information.
+ */
+private void printWelcome()
+{
+    System.out.println();
+    System.out.println("Welcome to the Haunted Mansion!");
+    System.out.println("You have entered an old mansion filled with mysteries.");
+    System.out.println("Explore the rooms and discover what is hidden inside.");
+    System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+    System.out.println();
+    System.out.println(currentRoom.getLongDescription());
+}
 
     /**
      * Given a command, process (that is: execute) the command.
