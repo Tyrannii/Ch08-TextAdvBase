@@ -29,36 +29,55 @@ public class Game
         parser = new Parser();
     }
 
+    
     /**
-     * Create all the rooms and link their exits together.
+     * Create the eight rooms of the haunted mansion
+     * and connect their exits.
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
-        // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        Room entrance, livingRoom, kitchen, diningRoom;
+        Room library, bedroom, basement, attic;
 
-        theater.setExit("west", outside);
+        // Create the rooms.
+        entrance = new Room("in the entrance hall of a haunted mansion");
+        livingRoom = new Room("in a dusty living room");
+        kitchen = new Room("in an abandoned kitchen");
+        diningRoom = new Room("in a dark dining room");
+        library = new Room("in a library filled with old books");
+        bedroom = new Room("in a creepy bedroom");
+        basement = new Room("in a cold, dark basement");
+        attic = new Room("in an attic filled with cobwebs");
 
-        pub.setExit("east", outside);
+        // Connect the rooms.
+        entrance.setExit("north", livingRoom);
+        entrance.setExit("east", kitchen);
+        entrance.setExit("west", library);
+        entrance.setExit("south", basement);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        livingRoom.setExit("south", entrance);
+        livingRoom.setExit("east", diningRoom);
 
-        office.setExit("west", lab);
+        kitchen.setExit("west", entrance);
+        kitchen.setExit("north", diningRoom);
 
-        currentRoom = outside;  // start game outside
+        diningRoom.setExit("west", livingRoom);
+        diningRoom.setExit("south", kitchen);
+
+        library.setExit("east", entrance);
+        library.setExit("north", bedroom);
+
+        bedroom.setExit("south", library);
+        bedroom.setExit("up", attic);
+
+        attic.setExit("down", bedroom);
+
+        basement.setExit("north", entrance);
+
+        // Start the player in the entrance hall.
+        currentRoom = entrance;
     }
+
 
     /**
      *  Main play routine.  Loops until end of play.
