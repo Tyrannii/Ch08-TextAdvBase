@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -18,17 +20,18 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Room previousRoom;
+private Room currentRoom;
+private ArrayList<Room> roomHistory;
         
-    /**
- * Create the game and initialize its rooms and parser.
+   /**
+ * Create the game and initialize its rooms, parser,
+ * and room history.
  */
 public Game()
 {
     createRooms();
     parser = new Parser();
-    previousRoom = null;
+    roomHistory = new ArrayList<>();
 }
 
     
@@ -152,14 +155,12 @@ case LOOK:
     System.out.println(currentRoom.getLongDescription());
     break;
     
-    case BACK:
-    if (previousRoom == null) {
+   case BACK:
+    if (roomHistory.isEmpty()) {
         System.out.println("There is no previous room!");
     }
     else {
-        Room temp = currentRoom;
-        currentRoom = previousRoom;
-        previousRoom = temp;
+        currentRoom = roomHistory.remove(roomHistory.size() - 1);
         System.out.println(currentRoom.getLongDescription());
     }
     break;
@@ -208,7 +209,7 @@ case QUIT:
     System.out.println("There is no door!");
 }
 else {
-    previousRoom = currentRoom;
+    roomHistory.add(currentRoom);
     currentRoom = nextRoom;
     System.out.println(currentRoom.getLongDescription());
 }
