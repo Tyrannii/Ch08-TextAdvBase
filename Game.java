@@ -22,18 +22,19 @@ public class Game
     private Parser parser;
 private Room currentRoom;
 private ArrayList<Room> roomHistory;
+private Player player;
         
-   /**
- * Create the game and initialize its rooms, parser,
- * and room history.
+  /**
+ * Create the game and initialize the rooms, parser,
+ * room history, and player.
  */
 public Game()
 {
     createRooms();
     parser = new Parser();
     roomHistory = new ArrayList<>();
+    player = new Player(currentRoom);
 }
-
     
     /**
      * Create the eight rooms of the haunted mansion
@@ -161,8 +162,17 @@ case LOOK:
     }
     else {
         currentRoom = roomHistory.remove(roomHistory.size() - 1);
+        player.setCurrentRoom(currentRoom);
         System.out.println(currentRoom.getLongDescription());
     }
+    break;
+    
+    case TAKE:
+    takeItem(command);
+    break;
+    
+    case INVENTORY:
+    printInventory();
     break;
 
 case QUIT:
@@ -211,6 +221,7 @@ case QUIT:
 else {
     roomHistory.add(currentRoom);
     currentRoom = nextRoom;
+    player.setCurrentRoom(currentRoom);
     System.out.println(currentRoom.getLongDescription());
 }
     }
@@ -230,4 +241,47 @@ else {
             return true;  // signal that we want to quit
         }
     }
+    
+    /**
+ * Pick up an item from the current room and add it
+ * to the player's inventory.
+ *
+ * @param command The command containing the item's name.
+ */
+private void takeItem(Command command)
+{
+    if (!command.hasSecondWord()) {
+        System.out.println("Take what?");
+        return;
+    }
+
+    String itemName = command.getSecondWord();
+    Item item = currentRoom.removeItem(itemName);
+
+    if (item == null) {
+        System.out.println("That item is not here.");
+    }
+    else {
+        player.addItem(item);
+        System.out.println("You picked up: " + item.getName());
+    }
+}
+
+/**
+ * Display all items currently carried by the player.
+ */
+private void printInventory()
+{
+    if (player.getInventory().isEmpty()) {
+        System.out.println("Your inventory is empty.");
+    }
+    else {
+        System.out.println("You are carrying:");
+
+        for (Item item : player.getInventory()) {
+            System.out.println("- " + item.getName()
+                + " (Weight: " + item.getWeight() + ")");
+        }
+    }
+}
 }

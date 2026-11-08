@@ -111,5 +111,23 @@ public void setItem(Item newItem)
 {
     items.add(newItem);
 }
+
+/**
+ * Remove an item from the room by its name.
+ *
+ * @param itemName The name of the item to remove.
+ * @return The removed item, or null if it was not found.
+ */
+public Item removeItem(String itemName)
+{
+    for (Item item : items) {
+        if (item.getName().equalsIgnoreCase(itemName)) {
+            items.remove(item);
+            return item;
+        }
+    }
+
+    return null;
+}
 }
 
